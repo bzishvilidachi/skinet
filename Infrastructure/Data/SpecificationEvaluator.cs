@@ -8,10 +8,12 @@ namespace Infrastructure.Data;
 public class SpecificationEvaluator<T> where T : BaseEntity
 {
   public static IQueryable<T> GetQuery(IQueryable<T> query, ISpecification<T> spec){
-    if (spec.Criteria != null){
-        query =query.Where(spec.Criteria);
+    if (spec.Criteria != null)
+    {
+      query = query.Where(spec.Criteria);
     }
-    if(spec.OrderBy != null){
+    if(spec.OrderBy != null)
+    {
       query = query.OrderBy(spec.OrderBy);
     }
 
@@ -22,8 +24,13 @@ public class SpecificationEvaluator<T> where T : BaseEntity
 
     if(spec.IsDistinct)
     {
-      query = query.Distinct();
+     query = query.Distinct();
     }
+
+    if(spec.IsPagingEnabled){
+      query = query.Skip(spec.Skip).Take(spec.Take);
+    }
+
     return query;
   }
 
@@ -52,6 +59,10 @@ public class SpecificationEvaluator<T> where T : BaseEntity
    {
     selectQuery = selectQuery?.Distinct();
    }
+    
+   if(spec.IsPagingEnabled){
+      selectQuery = selectQuery?.Skip(spec.Skip).Take(spec.Take);
+    }
    return selectQuery ?? query.Cast<TResult>();
   }
 }
