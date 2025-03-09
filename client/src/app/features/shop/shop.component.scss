@@ -1,0 +1,30 @@
+.custom-button {
+    height: 44px;
+    min-width: 110px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    text-transform: none;
+    transition: all 0.3s ease-in-out;
+    border: 1.5px solid rgba(152, 147, 147, 0.2); /* Slightly visible border */
+    background: rgba(0, 0, 0, 0.05); /* Light background to make it visible */
+    color: #333; /* Ensures text is visible */
+}
+
+/* Hover and Focus Effects */
+.custom-button:hover,
+.custom-button:focus {
+    background: rgba(0, 0, 0, 0.1); /* Darker on hover */
+    border-color: rgba(0, 0, 0, 0.4); /* Slightly darker border */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Icon Styling */
+.button-icon {
+    font-size: 20px;
+}
+

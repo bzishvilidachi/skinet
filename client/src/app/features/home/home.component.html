@@ -1,1 +1,20 @@
-<p>home works!</p>
+
+<div class="carousel-container w-full mt-30">
+    <ngx-slick-carousel #slickModal="slick-carousel" [config]="slideConfig">
+      <div ngxSlickItem *ngFor="let slide of slides" class="relative slide-item">
+        <img [src]="slide.img" alt="Banner Image" class="absolute  inset-0 w-full h-full object-cover">
+  
+       
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black/40">
+          <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-xl">
+            {{ slide.title }}
+          </h1>
+          <button class="button-primary mt-10" routerLink="/shop">
+            Go to shop
+          </button>
+          
+        </div>
+      </div>
+    </ngx-slick-carousel>
+  </div>
+  

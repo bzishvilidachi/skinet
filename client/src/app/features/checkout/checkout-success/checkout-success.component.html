@@ -1,31 +1,69 @@
-<section class="bg-white py-16">
-    <div class="mx-auto max-w-2xl px-4">
-        <h2 class="font-semibold text-2xl mb-2">Thanks for your fake order!</h2>
-        <p class="text-gray-500 mb-8">Your order <span class="font-medium">#42</span>
-            will never be processed as this is a fake shop. we will not notify you once your order has not shipped.
-        </p>
-        <div class="space-y-5 rounded-lg border border-gray-100 bg-gray-50 p-6 mb-8">
-            <dl class="flex items-center justify-between gap-4">
-                <dt class="font-normal text-gray-500">Date</dt>
-                <dd class="font-medium text-gray-900 text-end">20 Sep 2024</dd>
+
+<section *ngIf="signalrService.orderSignal() as order" class="bg-gray-50 py-16">
+    <div class="mx-auto max-w-2xl px-6 sm:px-8 lg:px-10 bg-white shadow-lg rounded-xl p-8">
+        <div class="text-center">
+            <h2 class="font-bold text-3xl text-gray-900 mb-4"> Thank You for Your Order!</h2>
+            <p class="text-gray-600 text-lg">
+                Your order <span class="font-semibold text-gray-800">#{{ order.id }}</span> 
+                has been received. We will notify you once it has shipped!
+            </p>
+        </div>
+
+        <div class="space-y-6 border border-gray-200 bg-gray-100 p-6 mt-6 rounded-lg shadow-sm">
+            <dl class="flex justify-between items-center">
+                <dt class="text-gray-500"> Date</dt>
+                <dd class="font-semibold text-gray-800 text-end">{{ order.orderDate | date: 'medium' }}</dd>
             </dl>
-            <dl class="flex items-center justify-between gap-4">
-                <dt class="font-normal text-gray-500">Payment method</dt>
-                <dd class="font-medium text-gray-900 text-end">Visa</dd>
+            <dl class="flex justify-between items-center">
+                <dt class="text-gray-500"> Payment Method</dt>
+                <dd class="font-semibold text-gray-800 text-end">{{ order.paymentSummary | card }}</dd>
             </dl>
-            <dl class="flex items-center justify-between gap-4">
-                <dt class="font-normal text-gray-500">Address</dt>
-                <dd class="font-medium text-gray-900 text-end">Address goes here</dd>
+            <dl class="flex justify-between items-center">
+                <dt class="text-gray-500"> Shipping Address</dt>
+                <dd class="font-semibold text-gray-800 text-end">{{ order.shippingAddress | address }}</dd>
             </dl>
-            <dl class="flex items-center justify-between gap-4">
-                <dt class="font-normal text-gray-500">Amount</dt>
-                <dd class="font-medium text-gray-900 text-end">$100</dd>
+            <dl class="flex justify-between items-center">
+                <dt class="text-gray-500"> Total Amount</dt>
+                <dd class="font-semibold text-green-600 text-end">{{ order.total | currency }}</dd>
             </dl>
         </div>
-       
-        <div class="flex items-center space-x-4">
-            <button class="rounded-lg" routerLink="/orders/42" mat-flat-button>View your order</button>
-            <button class="rounded-lg" routerLink="/shop" mat-stroked-button>Continue shopping</button>
+
+        <div class="flex flex-col sm:flex-row justify-center sm:justify-between mt-8 space-y-4 sm:space-y-0">
+            <button routerLink="/orders/{{ order.id }}" mat-stroked-button class="border-blue-600 text-blue-600 px-6 py-3 rounded-lg transition-all duration-300 hover:bg-blue-50">
+                 View Your Order
+            </button>
+            <button routerLink="/shop" mat-flat-button class="border bg-blue-600 text-white px-6 py-3 rounded-lg transition-all duration-300 hover:bg-blue-700">
+                 Continue Shopping
+            </button>
         </div>
     </div>
 </section>
+
+
+
+<section *ngIf="!signalrService.orderSignal()" 
+    class="bg-white py-16 flex justify-center items-center min-h-screen animate-fadeIn">
+    
+    <div class="max-w-lg px-6 text-center bg-gray-50 border border-gray-200 rounded-lg shadow-lg p-8">
+        <h2 class="font-semibold text-2xl mb-4 text-gray-700">Processing Your Order...</h2>
+
+        <div class="flex flex-col justify-center items-center space-y-4">
+            <mat-spinner diameter="50" class="text-blue-500"></mat-spinner>
+
+            <p class="text-xl font-medium text-gray-600 animate-pulse">
+                Loading your order details...
+            </p>
+
+            <span class="text-gray-500">Your payment has been received. We are finalizing your order.</span>
+        </div>
+
+        <div class="flex justify-center mt-6">
+            <button class="rounded-lg px-6 py-2 text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white transition duration-300" 
+                routerLink="/shop" 
+                mat-stroked-button>
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+</section>
+
