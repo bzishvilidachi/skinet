@@ -1,9 +1,12 @@
-<div class="max-w-screen-xl mx-auto mt-32 px-10 py-4 bg-transparent rounded-lg shadow-sm w-full">
+@if(busyService.busyRequestCount === 0){
+    <div class="max-w-screen-xl mx-auto mt-32 px-10 py-4 bg-transparent rounded-lg shadow-sm w-full">
     <div class="flex flex-col items-center justify-center py-12 w-full">
-        <mat-icon class="icon-display mb-12">shopping_cart</mat-icon>
+        <mat-icon class="icon-display mb-12">{{icon()}}</mat-icon>
         <p class="text-gray-600 text-lg font-semibold mb-4">
-            Your shopping cart is empty
+            {{message()}}
         </p>
-        <button mat-flat-button class="rounded-lg mt-5" routerLink="/shop">Go shopping!</button>
+        <button mat-flat-button class="rounded-lg mt-5" (click)="onAction()">{{actionText()}}</button>
     </div>
 </div>
+}
+
