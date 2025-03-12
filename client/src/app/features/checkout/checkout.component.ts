@@ -171,7 +171,8 @@ private async createOrderModel(): Promise<OrderToCreate>{
       expYear: card.exp_year
     },
     deliveryMethodId: cart.deliveryMethodId,
-    shippingAddress: shippingAddress
+    shippingAddress: shippingAddress,
+    discount: this.cartService.totals()?.discount
   }
 }
 

@@ -22,7 +22,6 @@ import { EmptyStateComponent } from "../../shared/components/empty-state/empty-s
 @Component({
   selector: 'app-shop',
   imports: [
-    MatCard,
     ProductItemComponent,
     MatButton,
     MatIcon,

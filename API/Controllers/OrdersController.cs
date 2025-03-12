@@ -12,7 +12,7 @@ using Microsoft.VisualBasic;
 namespace API.Controllers;
 
 [Authorize]
-public class OrdersController(ICartService cartService, IUnitOfWork unit) : BaseApiController
+public class OrdersController(ICartService cartService, IUnitOfWork unit, ICouponService couponService) : BaseApiController
 {
     [HttpPost]
     public async Task<ActionResult<Order>> CreateOrder(CreateOrderDto orderDto)
@@ -51,6 +51,7 @@ public class OrdersController(ICartService cartService, IUnitOfWork unit) : Base
         }
 
         var deliveryMethod = await unit.Repository<DeliveryMethod>().GetByIdAsync(orderDto.DeliveryMethodId);
+        
 
         if(deliveryMethod == null) return BadRequest("No delivery method selected");
 
@@ -63,6 +64,7 @@ public class OrdersController(ICartService cartService, IUnitOfWork unit) : Base
             PaymentSummary = orderDto.PaymentSummary,
             PaymentIntentId = cart.PaymentIntetId,
             BuyerEmail = email,
+            Discount = orderDto.Discount,
 
         };
 
