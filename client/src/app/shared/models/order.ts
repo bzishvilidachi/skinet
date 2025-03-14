@@ -1,4 +1,4 @@
-import { DeliveryMethod } from "./deliveryMethod"
+
 
 export interface  Order {
     id: number
