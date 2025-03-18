@@ -60,7 +60,7 @@ public class PaymentService : IPaymentService
         var service = new PaymentIntentService();
         
         
-        if(string.IsNullOrEmpty(cart.PaymentIntetId))
+        if(string.IsNullOrEmpty(cart.PaymentIntentId))
         {
             var options = new PaymentIntentCreateOptions
             {
@@ -69,7 +69,7 @@ public class PaymentService : IPaymentService
                 PaymentMethodTypes = ["card"]
             };
             var intent = await service.CreateAsync(options);
-            cart.PaymentIntetId = intent.Id;
+            cart.PaymentIntentId = intent.Id;
             cart.ClientSecret = intent.ClientSecret;
         }
         else
@@ -78,7 +78,7 @@ public class PaymentService : IPaymentService
             {
                Amount = amount
             };
-            await service.UpdateAsync(cart.PaymentIntetId, options);
+            await service.UpdateAsync(cart.PaymentIntentId, options);
         }
     }
     private async Task<long> ApplyDiscountAsync(AppCoupon appCoupon, long amount)

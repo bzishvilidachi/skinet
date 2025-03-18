@@ -10,7 +10,7 @@ public class ShoppingCart
  public List<CartItem> Items { get; set; } = [];
  public int? DeliveryMethodId { get; set; }
  public string? ClientSecret { get; set; }
- public string? PaymentIntetId { get; set; }
+ public string? PaymentIntentId { get; set; }
  public AppCoupon? Coupon { get; set; }
 
 }

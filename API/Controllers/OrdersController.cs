@@ -23,7 +23,7 @@ public class OrdersController(ICartService cartService, IUnitOfWork unit, ICoupo
 
         if (cart == null) return BadRequest("Cart not found");
 
-        if(cart.PaymentIntetId == null) return BadRequest("No payment intent for this order");
+        if(cart.PaymentIntentId == null) return BadRequest("No payment intent for this order");
 
         var items = new List<OrderItem>();
 
@@ -62,7 +62,7 @@ public class OrdersController(ICartService cartService, IUnitOfWork unit, ICoupo
             ShippingAddress = orderDto.ShippingAddress,
             Subtotal = items.Sum(x => x.Price * x.Quantity),
             PaymentSummary = orderDto.PaymentSummary,
-            PaymentIntentId = cart.PaymentIntetId,
+            PaymentIntentId = cart.PaymentIntentId,
             BuyerEmail = email,
             Discount = orderDto.Discount,
 

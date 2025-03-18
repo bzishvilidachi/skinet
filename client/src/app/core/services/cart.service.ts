@@ -54,14 +54,16 @@ export class CartService {
       })
     )
   }
-  setCart(cart: Cart){
+
+  setCart(cart: Cart) {
     return this.http.post<Cart>(this.baseUrl + 'cart', cart).pipe(
-     tap( cart => {
-      this.cart.set(cart)
-     })
-    );
+      tap(cart => {
+        this.cart.set(cart)
+      })
+    )
   }
 
+  
   async addItemToCart(item: CartItem | Product, quantity = 1){
     const cart = this.cart() ?? this.createCart();
     if(this.isProduct(item)){
