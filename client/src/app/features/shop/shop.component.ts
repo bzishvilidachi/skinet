@@ -54,10 +54,15 @@ export class ShopComponent implements OnInit{
   }
 
   initializeShop() {
-    this.shopService.getBrands();
-    this.shopService.getTypes(); 
+    this.shopService.getBrands().subscribe({
+      next: brands => (this.shopService.brands = brands)
+    });
+
+    this.shopService.getTypes().subscribe({
+      next: types => (this.shopService.types = types)
+    });
+
     this.getProducts();
-    
   }
 
   resetFilters(){

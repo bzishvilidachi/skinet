@@ -1,1 +1,6 @@
-{}
+{
+    "editor.fontSize": 20,
+    "debug.console.fontSize": 18,
+    "terminal.integrated.fontSize": 18,
+    "files.autoSave": "afterDelay"
+}

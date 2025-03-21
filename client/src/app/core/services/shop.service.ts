@@ -4,6 +4,7 @@ import { Pagination } from '../../shared/models/pagination';
 import { Product } from '../../shared/models/product';
 import { ShopParams } from '../../shared/models/shop.Params';
 import { environment } from '../../../environments/environment';
+import { of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,17 +46,17 @@ export class ShopService {
   }
 
 
-  getBrands(){
-    if(this.brands.length > 0) return;
-    return this.http.get<string[]>(this.baseUrl + 'products/brands').subscribe({
-      next: response => this.brands = response
-    })
+  getBrands() {
+    if (this.brands.length > 0) return of(this.brands); // Use `of()` to return existing data immediately
+    return this.http.get<string[]>(this.baseUrl + 'products/brands').pipe(
+      tap(response => (this.brands = response)) // Store brands after fetching
+    );
   }
-  
-  getTypes(){
-    if(this.types.length > 0) return;
-    return this.http.get<string[]>(this.baseUrl + 'products/types').subscribe({
-      next: response => this.types = response
-    })
+
+  getTypes() {
+    if (this.types.length > 0) return of(this.types);
+    return this.http.get<string[]>(this.baseUrl + 'products/types').pipe(
+      tap(response => (this.types = response))
+    );
   }
 }

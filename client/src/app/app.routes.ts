@@ -8,6 +8,7 @@ import { ServerErrorComponent } from './shared/components/server-error/server-er
 import { CartComponent } from './features/cart/cart.component';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
+import { ProductUpdateComponent } from './features/admin/edit/product-update.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,7 +21,6 @@ export const routes: Routes = [
     {path: 'test-error', component: TestErrorComponent},
     {path: 'not-found', component: NotFoundComponent},
     {path: 'server-error', component: ServerErrorComponent},
-    {path: 'admin', loadComponent: () => import('./features/admin/admin.component')
-        .then(c => c.AdminComponent), canActivate: [authGuard, adminGuard]},
+    {path: 'admin', loadChildren: () => import('./features/admin/routes').then(r => r.adminRoutes)},
     {path: '**', redirectTo: 'not-found', pathMatch: 'full'},
 ];

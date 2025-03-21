@@ -1,0 +1,67 @@
+<mat-card class="max-w-2xl mx-auto mt-20 p-10 bg-white shadow-lg rounded-2xl">
+    <form [formGroup]="productForm" (ngSubmit)="createProduct()" class="space-y-6">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold text-primary">Create Product</h1>
+        <p class="text-gray-500 mt-2">Fill in the details to create a new product.</p>
+      </div>
+  
+      <div class="grid grid-cols-2 gap-6">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Product Name</mat-label>
+          <input formControlName="name" matInput placeholder="Enter product name" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of types" [value]="type">
+              {{ type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Description</mat-label>
+        <textarea formControlName="description" matInput rows="3" placeholder="Enter product description"></textarea>
+      </mat-form-field>
+  
+      <div class="grid grid-cols-2 gap-6">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Price ($)</mat-label>
+          <input formControlName="price" matInput type="number" placeholder="Enter price" />
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Stock Quantity</mat-label>
+          <input formControlName="quantityInStock" matInput type="number" placeholder="Enter stock quantity" />
+        </mat-form-field>
+      </div>
+  
+      <div class="grid grid-cols-2 gap-6">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="brand">
+            <mat-option *ngFor="let brand of brands" [value]="brand">
+              {{ brand }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>Picture URL</mat-label>
+          <input formControlName="pictureUrl" matInput placeholder="Enter picture URL" />
+        </mat-form-field>
+      </div>
+  
+      <div class="flex items-center justify-between mt-6">
+        <button mat-flat-button type="button" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg" (click)="goBack()">
+          Back
+        </button>
+        <button mat-flat-button type="submit" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white rounded-lg" [disabled]="productForm.invalid">
+          Create Product
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  
