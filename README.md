@@ -1,7 +1,7 @@
 # SkiNet Project Repository
 
 ##  About the Project
-Welcome to the **SkiNet** application, built using **.NET 8** and **Angular 18**. 
+Welcome to the **SkiNet** application, built using **.NET 8** and **Angular 18**. Ski equipment E-Commerce is a web application built to showcase a functional e-commerce platform for ski and snowboarding gear. It includes secure authentication and authorization features, allowing users to create accounts, log in, and manage access based on roles.
 
 ---
 
